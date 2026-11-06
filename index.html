@@ -3,154 +3,511 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Play, Inc.</title>
-<meta name="description" content="Play, Inc. makes small, free games for Android phones. Offline, open source, no ads and no tracking.">
+<title>Play, Inc. | Free games for Android</title>
+<meta name="description" content="Play, Inc. makes free games for Android phones: Forkline, SumUp, Updraft, WoodLogic and Sudoku. No ads, no tracking, nothing to buy. Open source.">
+<meta name="theme-color" content="#110e1d">
+<meta property="og:title" content="Play, Inc.">
+<meta property="og:description" content="Free games for Android phones. No ads, no tracking, nothing to buy.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bartbasi.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ffb547'/%3E%3Cpath d='M25 19v26l21-13z' fill='%23110e1d'/%3E%3C/svg%3E">
 <style>
 :root {
-  color-scheme: light dark;
-  --bg: #fbf6ec;
-  --card: #ffffff;
-  --ink: #23201c;
-  --muted: #5b544a;
-  --line: #e4dccd;
-  --link: #8a3c12;
-  --accent: #e3a33a;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1b1a24;
-    --card: #252431;
-    --ink: #f3ece0;
-    --muted: #b9b1a3;
-    --line: #3a3847;
-    --link: #f2b860;
-    --accent: #e3a33a;
-  }
+  color-scheme: dark;
+  --bg: #110e1d;
+  --bg2: #171329;
+  --card: #1d1833;
+  --card2: #241e3f;
+  --ink: #f6f1e7;
+  --muted: #bdb5cf;
+  --line: #322b52;
+  --amber: #ffb547;
+  --coral: #ff6f6f;
+  --teal: #3fe0c5;
+  --radius: 22px;
+  --wrap: 1120px;
 }
 * { box-sizing: border-box; }
-html { background: var(--bg); }
+html { scroll-behavior: smooth; background: var(--bg); }
 body {
-  margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
-  max-width: 44rem;
+  margin: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.0625rem;
   line-height: 1.6;
+  overflow-x: hidden;
 }
-header { padding: 2rem 0 1rem; }
-h1 { font-size: 2.4rem; line-height: 1.1; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
-h1::after {
-  content: "";
-  display: block;
-  width: 3.5rem;
-  height: 0.3rem;
-  margin-top: 0.75rem;
-  border-radius: 0.2rem;
-  background: var(--accent);
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
+@media (min-width: 700px) { .wrap { padding: 0 32px; } }
+
+/* Top bar */
+.top {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(17, 14, 29, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
-h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.5rem 0 0.75rem; }
-h3 { font-size: 1.15rem; margin: 0 0 0.25rem; }
-p, ul { margin: 0.75rem 0; }
-.lead { font-size: 1.2rem; color: var(--ink); }
-a { color: var(--link); text-decoration: underline; text-underline-offset: 0.15em; }
-.promise { padding-left: 1.25rem; }
-.promise li { margin: 0.35rem 0; }
-.games { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
-.games li {
-  background: var(--card);
+.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.01em; }
+.mark { width: 34px; height: 34px; flex: none; }
+.nav { display: flex; gap: 4px; }
+.nav a { text-decoration: none; color: var(--muted); font-size: 0.95rem; font-weight: 600; padding: 10px 12px; border-radius: 10px; }
+.nav a:hover { color: var(--ink); background: rgba(255, 255, 255, 0.06); }
+@media (max-width: 520px) { .nav a.hide-sm { display: none; } }
+
+/* Hero */
+.hero { position: relative; padding: 64px 0 40px; overflow: hidden; }
+.hero::before, .hero::after {
+  content: ""; position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5; z-index: 0;
+}
+.hero::before { width: 520px; height: 520px; background: #6b3fd6; top: -180px; left: -160px; }
+.hero::after { width: 480px; height: 480px; background: #ff8a3d; bottom: -260px; right: -120px; opacity: 0.32; }
+.hero .wrap { position: relative; z-index: 1; display: grid; gap: 40px; align-items: center; }
+@media (min-width: 900px) { .hero .wrap { grid-template-columns: 1.05fr 1fr; } .hero { padding: 96px 0 72px; } }
+.eyebrow { display: inline-block; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
+h1 { font-size: clamp(2.5rem, 7vw, 4.3rem); line-height: 1.02; letter-spacing: -0.03em; margin: 0 0 20px; font-weight: 900; }
+h1 .grad { background: linear-gradient(90deg, var(--amber), var(--coral) 55%, #c86bff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lead { font-size: 1.2rem; color: var(--muted); max-width: 34rem; margin: 0 0 28px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px;
+  border-radius: 999px; font-weight: 700; font-size: 1rem; text-decoration: none;
+  border: 1px solid transparent; transition: transform 0.15s ease, background 0.15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.primary { background: var(--amber); color: #1b1307; }
+.btn.ghost { border-color: var(--line); background: rgba(255, 255, 255, 0.04); color: var(--ink); }
+.btn.ghost:hover { background: rgba(255, 255, 255, 0.09); }
+.btn.small { min-height: 44px; padding: 0 16px; font-size: 0.94rem; }
+
+.collage { position: relative; height: 430px; max-width: 520px; width: 100%; margin: 0 auto; }
+.collage .phone { position: absolute; width: 38%; }
+.collage .p1 { left: 2%; top: 40px; transform: rotate(-9deg); }
+.collage .p2 { left: 31%; top: 0; z-index: 2; width: 40%; }
+.collage .p3 { right: 2%; top: 46px; transform: rotate(8deg); }
+@media (max-width: 520px) { .collage { height: 330px; } }
+
+/* Phone frames */
+.phone {
+  border-radius: 26px; padding: 6px; background: #07060c;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09), 0 24px 50px -12px rgba(0, 0, 0, 0.65);
+}
+.phone img { border-radius: 20px; width: 100%; }
+.wide { border-radius: 16px; padding: 5px; }
+.wide img { border-radius: 12px; }
+
+/* Stats strip */
+.stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg2); }
+.stats ul { list-style: none; margin: 0 auto; padding: 22px 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: var(--wrap); text-align: center; }
+@media (min-width: 700px) { .stats ul { grid-template-columns: repeat(4, 1fr); } }
+.stats b { display: block; font-size: 1.9rem; font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; }
+.stats span { color: var(--muted); font-size: 0.92rem; }
+
+/* Sections */
+section { padding: 72px 0; }
+.section-head { max-width: 40rem; margin-bottom: 40px; }
+h2 { font-size: clamp(1.9rem, 4.4vw, 2.6rem); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; font-weight: 900; }
+.section-head p { color: var(--muted); margin: 0; font-size: 1.1rem; }
+
+/* Featured */
+.featured {
+  border-radius: 28px; overflow: hidden; background: var(--card);
+  border: 1px solid var(--line); display: grid;
+}
+.featured .art img { width: 100%; }
+.featured .body { padding: 28px 24px 30px; }
+@media (min-width: 900px) {
+  .featured .body { padding: 36px 40px 40px; display: grid; grid-template-columns: 1fr auto; gap: 8px 48px; align-items: end; }
+  .featured .body .pill, .featured .body h3, .featured .body p { grid-column: 1; }
+  .featured .body .pill { justify-self: start; }
+  .featured .body .links { grid-column: 2; grid-row: 1 / span 3; flex-direction: column; align-self: center; }
+  .featured .body p { margin-bottom: 0; }
+}
+.pill {
+  display: inline-block; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 5px 11px; border-radius: 999px; background: rgba(255, 181, 71, 0.14); color: var(--amber);
+}
+.featured h3 { font-size: 2rem; margin: 12px 0 8px; letter-spacing: -0.02em; line-height: 1.15; }
+.featured p { color: var(--muted); margin: 0 0 22px; }
+
+/* Game rows */
+.game { padding: 56px 0; border-top: 1px solid var(--line); }
+.game:first-of-type { border-top: 0; }
+.game .grid { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 900px) {
+  .game .grid { grid-template-columns: 0.9fr 1.1fr; gap: 56px; }
+  .game.flip .grid { grid-template-columns: 1.1fr 0.9fr; }
+  .game.flip .info { order: 2; }
+  .shots { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; }
+}
+.title-row { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.app-icon { width: 72px; height: 72px; border-radius: 18px; flex: none; box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.6); }
+.game h3 { font-size: 1.9rem; line-height: 1.1; margin: 0 0 4px; letter-spacing: -0.02em; }
+.genre { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
+.game .info > p { color: var(--muted); margin: 0 0 16px; }
+.feats { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 8px; }
+.feats li { position: relative; padding-left: 26px; }
+.feats li::before {
+  content: ""; position: absolute; left: 0; top: 0.45em; width: 14px; height: 14px; border-radius: 4px;
+  background: var(--accent); transform: rotate(45deg) scale(0.7);
+}
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.shots {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(170px, 1fr); gap: 16px;
+  overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 4px 18px; margin: 0 -4px;
+  scrollbar-width: thin;
+}
+.shots > * { scroll-snap-align: start; }
+.shots.land { grid-auto-columns: minmax(280px, 1fr); }
+@media (max-width: 899px) { .shots { grid-auto-columns: 62%; } .shots.land { grid-auto-columns: 86%; } }
+.shots .phone:nth-child(2) { transform: translateY(-14px); }
+@media (max-width: 899px) { .shots .phone:nth-child(2) { transform: none; } }
+.land-stack { display: grid; gap: 16px; }
+.land-stack .wide:first-child { grid-column: 1 / -1; }
+@media (min-width: 600px) { .land-stack { grid-template-columns: 1fr 1fr; } }
+
+/* Promise */
+.promise { background: var(--bg2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.cards { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 600px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+.card svg { width: 40px; height: 40px; margin-bottom: 14px; }
+.card h3 { margin: 0 0 6px; font-size: 1.2rem; }
+.card p { margin: 0; color: var(--muted); font-size: 1rem; }
+
+/* Support */
+.support-box {
+  border-radius: 28px; padding: 40px 24px; text-align: center;
+  background: radial-gradient(120% 140% at 50% 0%, #3a2a66 0%, var(--card) 60%);
   border: 1px solid var(--line);
-  border-radius: 0.75rem;
-  padding: 1rem 1.1rem;
 }
-.games p { margin: 0.25rem 0 0.6rem; color: var(--muted); }
-.links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; font-size: 0.98rem; }
-.links a { display: inline-block; padding: 0.35rem 0; }
-footer {
-  margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.95rem;
-}
+@media (min-width: 700px) { .support-box { padding: 56px; } }
+.support-box p { color: var(--muted); max-width: 36rem; margin: 0 auto 24px; }
+.support-box .ctas { justify-content: center; }
+
+footer { padding: 48px 0 56px; color: var(--muted); font-size: 0.95rem; border-top: 1px solid var(--line); }
+footer .wrap { display: grid; gap: 28px; }
+@media (min-width: 800px) { footer .wrap { grid-template-columns: 1.3fr 1fr 1fr; } }
+footer h4 { color: var(--ink); margin: 0 0 10px; font-size: 0.95rem; }
+footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+footer ul a { text-decoration: none; display: inline-block; padding: 4px 0; }
+footer ul a:hover { color: var(--ink); text-decoration: underline; }
 footer p { margin: 0.3rem 0; }
+.fine { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+
+a:focus-visible, .btn:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } .btn:hover { transform: none; } }
 </style>
 </head>
 <body>
-<header>
-<h1>Play, Inc.</h1>
-<p class="lead">Small, free games for Android phones, made by Bart Basi.</p>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#ffb547"/><path d="M25 19v26l21-13z" fill="#110e1d"/></svg>
+      Play, Inc.
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#games">Games</a>
+      <a class="hide-sm" href="#promise">Our promise</a>
+      <a href="#support">Support</a>
+    </nav>
+  </div>
 </header>
 
 <main>
-<p>Every Play, Inc. game follows the same rules:</p>
-<ul class="promise">
-<li>Free, with no ads and nothing to buy.</li>
-<li>No accounts, no tracking and no analytics.</li>
-<li>Works offline. The games never connect to the internet and ask for no Android permissions.</li>
-<li>Your progress stays on your phone.</li>
-<li>Open source, under the GNU GPL v3 with additional terms.</li>
-</ul>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Independent games for Android</span>
+      <h1>Games made to be <span class="grad">played, not sold.</span></h1>
+      <p class="lead">Play, Inc. makes free games for Android phones. No ads, no tracking and nothing to buy. Every game is open source, and every picture and sound in it is made in code.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#games">See the games</a>
+        <a class="btn ghost" href="#promise">Our promise</a>
+      </div>
+    </div>
+    <div class="collage" aria-hidden="true">
+      <div class="phone p1"><img src="img/sumup/chain.webp" width="540" height="960" alt=""></div>
+      <div class="phone p2"><img src="img/forkline/wave.webp" width="540" height="1080" alt=""></div>
+      <div class="phone p3"><img src="img/woodlogic/board.webp" width="540" height="960" alt=""></div>
+    </div>
+  </div>
+</section>
 
-<h2>Games</h2>
-<ul class="games">
-<li>
-<h3>Forkline</h3>
-<p>A tower defense game. Hand-built maps whose roads fork, and gates you place to steer the night creatures. Now in testing.</p>
-<div class="links">
-<a href="https://bartbasi.github.io/forkline/">About the game</a>
-<a href="https://github.com/bartbasi/forkline/releases">Test builds</a>
-<a href="https://github.com/bartbasi/forkline">Source code</a>
-<a href="https://bartbasi.github.io/forkline/privacy-policy/">Privacy policy</a>
+<div class="stats">
+  <ul>
+    <li><b>5</b><span>games</span></li>
+    <li><b>0</b><span>ads and trackers</span></li>
+    <li><b>0</b><span>things to buy</span></li>
+    <li><b>100%</b><span>open source</span></li>
+  </ul>
 </div>
-</li>
-<li>
-<h3>SumUp</h3>
-<p>A number merge puzzle. Everything in it is drawn and synthesized in code.</p>
-<div class="links">
-<a href="https://bartbasi.github.io/SumUp/">About the game</a>
-<a href="https://github.com/bartbasi/SumUp">Source code</a>
-<a href="https://bartbasi.github.io/SumUp/privacy/">Privacy policy</a>
-</div>
-</li>
-<li>
-<h3>Updraft</h3>
-<p>A tilt-to-fly game. Ride warm air in a red balloon or a paper plane.</p>
-<div class="links">
-<a href="https://bartbasi.github.io/Updraft/">About the game</a>
-<a href="https://github.com/bartbasi/Updraft">Source code</a>
-<a href="https://bartbasi.github.io/Updraft/privacy-policy/">Privacy policy</a>
-</div>
-</li>
-<li>
-<h3>WoodLogic</h3>
-<p>A screw puzzle for phones.</p>
-<div class="links">
-<a href="https://bartbasi.github.io/WoodLogic/">About the game</a>
-<a href="https://github.com/bartbasi/WoodLogic">Source code</a>
-<a href="https://bartbasi.github.io/WoodLogic/privacy-policy/">Privacy policy</a>
-</div>
-</li>
-<li>
-<h3>Sudoku</h3>
-<p>Sudoku where every empty cell shows all nine candidates around its edge, and you cross them out as you rule them out.</p>
-<div class="links">
-<a href="https://bartbasi.github.io/Sudoku/">About the game</a>
-<a href="https://github.com/bartbasi/Sudoku">Source code</a>
-<a href="https://bartbasi.github.io/Sudoku/privacy/">Privacy policy</a>
-</div>
-</li>
-</ul>
 
-<h2>Support and contact</h2>
-<p>If you enjoy the games, you can <a href="https://buymeacoffee.com/playinc">buy me a coffee</a>. It is never required, and it unlocks nothing.</p>
-<p>Questions, ideas or a bug to report: <a href="mailto:bartbasi@gmail.com">bartbasi@gmail.com</a>, or open an issue in the game's repository.</p>
+<section id="games">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Coming next</span>
+      <h2>Forkline</h2>
+      <p>Our biggest game yet, now in testing.</p>
+    </div>
+    <div class="featured">
+      <div class="art"><img src="img/forkline/feature.webp" width="1024" height="500" alt="Forkline: a lantern-lit watch post beside a forked road at dusk, with night creatures coming down it."></div>
+      <div class="body">
+        <span class="pill">In testing</span>
+        <h3>Tower defense where the roads fork.</h3>
+        <p>Night creatures come down the roads of a hillside village. Build towers beside them and place gates to send the creatures down the branch you choose. 48 levels in 8 regions, roguelite runs and a daily challenge.</p>
+        <div class="links">
+          <a class="btn primary small" href="https://github.com/bartbasi/forkline/releases">Get the test build</a>
+          <a class="btn ghost small" href="#forkline">More about Forkline</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our games</span>
+      <h2>Five games, all free.</h2>
+      <p>Each one plays offline, keeps your progress on your phone and asks for no Android permissions.</p>
+    </div>
+
+    <article class="game" id="forkline" style="--accent: #ffb547;">
+      <div class="grid">
+        <div class="info">
+          <div class="title-row">
+            <img class="app-icon" src="img/forkline/icon.png" width="192" height="192" alt="">
+            <div><h3>Forkline</h3><span class="genre">Tower defense</span></div>
+          </div>
+          <p>A cozy storybook village at dusk. Solve each map like a puzzle in the build phase, then watch your defense work as the waves come down the roads.</p>
+          <ul class="feats">
+            <li>Gates you place to steer creatures down each fork</li>
+            <li>A campaign of 48 levels, each with stars and a Twist</li>
+            <li>Roguelite runs with card picks, and a daily challenge</li>
+            <li>A landscape layout on a foldable's inner screen</li>
+          </ul>
+          <div class="links">
+            <a class="btn primary small" href="https://github.com/bartbasi/forkline/releases">Test builds</a>
+            <a class="btn ghost small" href="https://bartbasi.github.io/forkline/">Game site</a>
+            <a class="btn ghost small" href="https://github.com/bartbasi/forkline">Source code</a>
+            <a class="btn ghost small" href="https://bartbasi.github.io/forkline/privacy-policy/">Privacy</a>
+          </div>
+        </div>
+        <div class="shots">
+          <div class="phone"><img src="img/forkline/build.webp" width="540" height="1080" loading="lazy" alt="Forkline build phase: towers beside a forked road, with a gate closing one branch."></div>
+          <div class="phone"><img src="img/forkline/wave.webp" width="540" height="1080" loading="lazy" alt="Forkline during a wave: creatures on the road and towers firing."></div>
+          <div class="phone"><img src="img/forkline/levels.webp" width="540" height="1080" loading="lazy" alt="Forkline campaign list with stars earned on each level."></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="game flip" id="sumup" style="--accent: #ff5d9e;">
+      <div class="grid">
+        <div class="info">
+          <div class="title-row">
+            <img class="app-icon" src="img/sumup/icon.png" width="192" height="192" alt="">
+            <div><h3>SumUp</h3><span class="genre">Number puzzle</span></div>
+          </div>
+          <p>A calm, clever number puzzle. Drag across matching tiles to join them into one bigger number, then keep going and see how high you can climb.</p>
+          <ul class="feats">
+            <li>Chains in eight directions, each tile the same or double</li>
+            <li>Boosters paid for with your score, never with money</li>
+            <li>Three complete looks: Gumdrop, Slate and Nova</li>
+          </ul>
+          <div class="links">
+            <a class="btn ghost small" href="https://bartbasi.github.io/SumUp/">Game site</a>
+            <a class="btn ghost small" href="https://github.com/bartbasi/SumUp">Source code</a>
+            <a class="btn ghost small" href="https://bartbasi.github.io/SumUp/privacy/">Privacy</a>
+          </div>
+        </div>
+        <div class="shots">
+          <div class="phone"><img src="img/sumup/chain.webp" width="540" height="960" loading="lazy" alt="SumUp in the Gumdrop look: a chain of matching tiles being joined."></div>
+          <div class="phone"><img src="img/sumup/nova.webp" width="540" height="960" loading="lazy" alt="SumUp in the Nova look, with round glowing tiles."></div>
+          <div class="phone"><img src="img/sumup/slate.webp" width="540" height="960" loading="lazy" alt="SumUp in the Slate look, with flat square tiles."></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="game" id="updraft" style="--accent: #ff6a5a;">
+      <div class="grid">
+        <div class="info">
+          <div class="title-row">
+            <img class="app-icon" src="img/updraft/icon.png" width="192" height="192" alt="">
+            <div><h3>Updraft</h3><span class="genre">Tilt to fly</span></div>
+          </div>
+          <p>A kid lets go of a little red balloon in the bedroom, and you take it from there. Tilt your phone to ride warm air out of the house, over the valley and beyond.</p>
+          <ul class="feats">
+            <li>A red balloon or a folded paper plane</li>
+            <li>Sunbeams, kettle steam, thermals and ridge wind</li>
+            <li>An Endless country to explore, and a daily flight</li>
+          </ul>
+          <div class="links">
+            <a class="btn ghost small" href="https://bartbasi.github.io/Updraft/">Game site</a>
+            <a class="btn ghost small" href="https://github.com/bartbasi/Updraft">Source code</a>
+            <a class="btn ghost small" href="https://bartbasi.github.io/Updraft/privacy-policy/">Privacy</a>
+          </div>
+        </div>
+        <div class="land-stack">
+          <div class="phone wide"><img src="img/updraft/valley.webp" width="960" height="540" loading="lazy" alt="Updraft: the red balloon rising over a green valley with a gull and sheep below."></div>
+          <div class="phone wide"><img src="img/updraft/sunbeam.webp" width="960" height="540" loading="lazy" alt="Updraft: the balloon riding a sunbeam down a long hallway."></div>
+          <div class="phone wide"><img src="img/updraft/viaduct.webp" width="960" height="540" loading="lazy" alt="Updraft: the balloon flying under the arches of a viaduct toward a star."></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="game flip" id="woodlogic" style="--accent: #e0a94a;">
+      <div class="grid">
+        <div class="info">
+          <div class="title-row">
+            <img class="app-icon" src="img/woodlogic/icon.png" width="192" height="192" alt="">
+            <div><h3>WoodLogic</h3><span class="genre">Screw puzzle</span></div>
+          </div>
+          <p>A wooden picture hangs on the board, held on by colored screws. Tap a screw to spin it out and fill the boxes. Plan ahead, because the tray is small.</p>
+          <ul class="feats">
+            <li>Levels made on your phone and checked by a solver</li>
+            <li>A Daily puzzle, and a Relaxed mode with no clock</li>
+            <li>Woods and metals to unlock just by playing</li>
+          </ul>
+          <div class="links">
+            <a class="btn ghost small" href="https://bartbasi.github.io/WoodLogic/">Game site</a>
+            <a class="btn ghost small" href="https://github.com/bartbasi/WoodLogic">Source code</a>
+            <a class="btn ghost small" href="https://bartbasi.github.io/WoodLogic/privacy-policy/">Privacy</a>
+          </div>
+        </div>
+        <div class="shots">
+          <div class="phone"><img src="img/woodlogic/board.webp" width="540" height="960" loading="lazy" alt="WoodLogic: wooden planks held by colored screws, with boxes to fill at the top."></div>
+          <div class="phone"><img src="img/woodlogic/home.webp" width="540" height="960" loading="lazy" alt="WoodLogic home screen with Play, Daily and Relaxed."></div>
+          <div class="phone"><img src="img/woodlogic/map.webp" width="540" height="960" loading="lazy" alt="WoodLogic progress map with stars on finished levels."></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="game" id="sudoku" style="--accent: #6f8bff;">
+      <div class="grid">
+        <div class="info">
+          <div class="title-row">
+            <img class="app-icon" src="img/sudoku/icon.png" width="192" height="192" alt="">
+            <div><h3>Sudoku</h3><span class="genre">Logic puzzle</span></div>
+          </div>
+          <p>Sudoku where every empty cell shows all nine candidates around its edge, and you cross them out by hand as you rule them out.</p>
+          <ul class="feats">
+            <li>Five levels, from Beginner to Expert</li>
+            <li>Hints that point the way and never fill in for you</li>
+            <li>Lessons that teach each technique, and a dark look</li>
+          </ul>
+          <div class="links">
+            <a class="btn ghost small" href="https://bartbasi.github.io/Sudoku/">Game site</a>
+            <a class="btn ghost small" href="https://github.com/bartbasi/Sudoku">Source code</a>
+            <a class="btn ghost small" href="https://bartbasi.github.io/Sudoku/privacy/">Privacy</a>
+          </div>
+        </div>
+        <div class="shots">
+          <div class="phone"><img src="img/sudoku/play.webp" width="540" height="898" loading="lazy" alt="Sudoku in the light look: candidates around each cell, some crossed out."></div>
+          <div class="phone"><img src="img/sudoku/hint.webp" width="540" height="898" loading="lazy" alt="Sudoku showing a lesson hint: in this box, 6 fits in only one cell."></div>
+          <div class="phone"><img src="img/sudoku/play-dark.webp" width="540" height="898" loading="lazy" alt="Sudoku in the dark look."></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="promise" id="promise">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our promise</span>
+      <h2>Every game follows the same rules.</h2>
+      <p>No exceptions, and no fine print.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#ffb547" opacity="0.18"/><path d="M13 21l5 5 10-12" fill="none" stroke="#ffb547" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Free, for good</h3>
+        <p>No ads and nothing to buy. Everything in the game is earned by playing.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#3fe0c5" opacity="0.18"/><circle cx="20" cy="20" r="8" fill="none" stroke="#3fe0c5" stroke-width="3"/><path d="M11 29L29 11" stroke="#3fe0c5" stroke-width="3" stroke-linecap="round"/></svg>
+        <h3>No tracking</h3>
+        <p>No accounts, no analytics and no tracking of any kind.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#ff6f6f" opacity="0.18"/><path d="M12 17a12 12 0 0 1 16 0M15 21a7 7 0 0 1 10 0" fill="none" stroke="#ff6f6f" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="26" r="2.2" fill="#ff6f6f"/><path d="M11 30L29 12" stroke="#ff6f6f" stroke-width="3" stroke-linecap="round"/></svg>
+        <h3>Fully offline</h3>
+        <p>The games never connect to the internet and ask for no Android permissions.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#c86bff" opacity="0.18"/><rect x="13" y="9" width="14" height="22" rx="3" fill="none" stroke="#c86bff" stroke-width="3"/><circle cx="20" cy="26" r="1.8" fill="#c86bff"/></svg>
+        <h3>Your phone, your progress</h3>
+        <p>Saves stay on your phone. Nothing is sent anywhere.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#6f8bff" opacity="0.18"/><path d="M16 13l-7 7 7 7M24 13l7 7-7 7" fill="none" stroke="#6f8bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Open source</h3>
+        <p>Every game's source code is public, under the GNU GPL v3 with additional terms.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#e0a94a" opacity="0.18"/><path d="M12 28l4-12 4 8 3-5 5 9z" fill="none" stroke="#e0a94a" stroke-width="3" stroke-linejoin="round"/><circle cx="26" cy="13" r="2.5" fill="#e0a94a"/></svg>
+        <h3>Made in code</h3>
+        <p>Every picture, effect, sound and song is made by the game's own code.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="support">
+  <div class="wrap">
+    <div class="support-box">
+      <span class="eyebrow">Support</span>
+      <h2>Enjoying the games?</h2>
+      <p>You can buy me a coffee. It is never required, and it unlocks nothing. For questions, ideas or a bug to report, send an email or open an issue in the game's repository.</p>
+      <div class="ctas">
+        <a class="btn primary" href="https://buymeacoffee.com/playinc">Buy me a coffee</a>
+        <a class="btn ghost" href="mailto:bartbasi@gmail.com">bartbasi@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer>
-<p>Copyright 2026 Play, Inc.</p>
-<p>Made by Bart Basi.</p>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#">
+        <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#ffb547"/><path d="M25 19v26l21-13z" fill="#110e1d"/></svg>
+        Play, Inc.
+      </a>
+      <p style="margin-top: 12px;">Free games for Android phones. No ads, no tracking, nothing to buy.</p>
+    </div>
+    <div>
+      <h4>Games</h4>
+      <ul>
+        <li><a href="#forkline">Forkline</a></li>
+        <li><a href="#sumup">SumUp</a></li>
+        <li><a href="#updraft">Updraft</a></li>
+        <li><a href="#woodlogic">WoodLogic</a></li>
+        <li><a href="#sudoku">Sudoku</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#promise">Our promise</a></li>
+        <li><a href="https://github.com/bartbasi">GitHub</a></li>
+        <li><a href="https://buymeacoffee.com/playinc">Buy me a coffee</a></li>
+        <li><a href="mailto:bartbasi@gmail.com">Contact</a></li>
+      </ul>
+    </div>
+    <div class="fine">
+      <span>Copyright 2026 Play, Inc.</span>
+      <span>Made by Bart Basi.</span>
+    </div>
+  </div>
 </footer>
 </body>
 </html>
