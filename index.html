@@ -1,513 +1,611 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Play, Inc. | Free games for Android</title>
-<meta name="description" content="Play, Inc. makes free games for Android phones: Forkline, SumUp, Updraft, WoodLogic and Sudoku. No ads, no tracking, nothing to buy. Open source.">
-<meta name="theme-color" content="#110e1d">
-<meta property="og:title" content="Play, Inc.">
-<meta property="og:description" content="Free games for Android phones. No ads, no tracking, nothing to buy.">
+<title>Free Play, Inc. | Free games, apps and web sites</title>
+<meta name="description" content="Free Play, Inc. makes free Android games with no ads, no tracking and nothing to buy. It started on 9 October 2026 with a red balloon, and now makes apps and web sites too.">
+<link rel="canonical" href="https://freeplayinc.org/">
+<meta name="theme-color" content="#ffc81e">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://bartbasi.github.io/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ffb547'/%3E%3Cpath d='M25 19v26l21-13z' fill='%23110e1d'/%3E%3C/svg%3E">
-<style>
-:root {
-  color-scheme: dark;
-  --bg: #110e1d;
-  --bg2: #171329;
-  --card: #1d1833;
-  --card2: #241e3f;
-  --ink: #f6f1e7;
-  --muted: #bdb5cf;
-  --line: #322b52;
-  --amber: #ffb547;
-  --coral: #ff6f6f;
-  --teal: #3fe0c5;
-  --radius: 22px;
-  --wrap: 1120px;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: var(--bg); }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-img { display: block; max-width: 100%; height: auto; }
-a { color: inherit; }
-.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
-@media (min-width: 700px) { .wrap { padding: 0 32px; } }
-
-/* Top bar */
-.top {
-  position: sticky; top: 0; z-index: 10;
-  background: rgba(17, 14, 29, 0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.01em; }
-.mark { width: 34px; height: 34px; flex: none; }
-.nav { display: flex; gap: 4px; }
-.nav a { text-decoration: none; color: var(--muted); font-size: 0.95rem; font-weight: 600; padding: 10px 12px; border-radius: 10px; }
-.nav a:hover { color: var(--ink); background: rgba(255, 255, 255, 0.06); }
-@media (max-width: 520px) { .nav a.hide-sm { display: none; } }
-
-/* Hero */
-.hero { position: relative; padding: 64px 0 40px; overflow: hidden; }
-.hero::before, .hero::after {
-  content: ""; position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5; z-index: 0;
-}
-.hero::before { width: 520px; height: 520px; background: #6b3fd6; top: -180px; left: -160px; }
-.hero::after { width: 480px; height: 480px; background: #ff8a3d; bottom: -260px; right: -120px; opacity: 0.32; }
-.hero .wrap { position: relative; z-index: 1; display: grid; gap: 40px; align-items: center; }
-@media (min-width: 900px) { .hero .wrap { grid-template-columns: 1.05fr 1fr; } .hero { padding: 96px 0 72px; } }
-.eyebrow { display: inline-block; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
-h1 { font-size: clamp(2.5rem, 7vw, 4.3rem); line-height: 1.02; letter-spacing: -0.03em; margin: 0 0 20px; font-weight: 900; }
-h1 .grad { background: linear-gradient(90deg, var(--amber), var(--coral) 55%, #c86bff); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.lead { font-size: 1.2rem; color: var(--muted); max-width: 34rem; margin: 0 0 28px; }
-.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-.btn {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px;
-  border-radius: 999px; font-weight: 700; font-size: 1rem; text-decoration: none;
-  border: 1px solid transparent; transition: transform 0.15s ease, background 0.15s ease;
-}
-.btn:hover { transform: translateY(-2px); }
-.btn.primary { background: var(--amber); color: #1b1307; }
-.btn.ghost { border-color: var(--line); background: rgba(255, 255, 255, 0.04); color: var(--ink); }
-.btn.ghost:hover { background: rgba(255, 255, 255, 0.09); }
-.btn.small { min-height: 44px; padding: 0 16px; font-size: 0.94rem; }
-
-.collage { position: relative; height: 430px; max-width: 520px; width: 100%; margin: 0 auto; }
-.collage .phone { position: absolute; width: 38%; }
-.collage .p1 { left: 2%; top: 40px; transform: rotate(-9deg); }
-.collage .p2 { left: 31%; top: 0; z-index: 2; width: 40%; }
-.collage .p3 { right: 2%; top: 46px; transform: rotate(8deg); }
-@media (max-width: 520px) { .collage { height: 330px; } }
-
-/* Phone frames */
-.phone {
-  border-radius: 26px; padding: 6px; background: #07060c;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09), 0 24px 50px -12px rgba(0, 0, 0, 0.65);
-}
-.phone img { border-radius: 20px; width: 100%; }
-.wide { border-radius: 16px; padding: 5px; }
-.wide img { border-radius: 12px; }
-
-/* Stats strip */
-.stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg2); }
-.stats ul { list-style: none; margin: 0 auto; padding: 22px 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: var(--wrap); text-align: center; }
-@media (min-width: 700px) { .stats ul { grid-template-columns: repeat(4, 1fr); } }
-.stats b { display: block; font-size: 1.9rem; font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; }
-.stats span { color: var(--muted); font-size: 0.92rem; }
-
-/* Sections */
-section { padding: 72px 0; }
-.section-head { max-width: 40rem; margin-bottom: 40px; }
-h2 { font-size: clamp(1.9rem, 4.4vw, 2.6rem); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; font-weight: 900; }
-.section-head p { color: var(--muted); margin: 0; font-size: 1.1rem; }
-
-/* Featured */
-.featured {
-  border-radius: 28px; overflow: hidden; background: var(--card);
-  border: 1px solid var(--line); display: grid;
-}
-.featured .art img { width: 100%; }
-.featured .body { padding: 28px 24px 30px; }
-@media (min-width: 900px) {
-  .featured .body { padding: 36px 40px 40px; display: grid; grid-template-columns: 1fr auto; gap: 8px 48px; align-items: end; }
-  .featured .body .pill, .featured .body h3, .featured .body p { grid-column: 1; }
-  .featured .body .pill { justify-self: start; }
-  .featured .body .links { grid-column: 2; grid-row: 1 / span 3; flex-direction: column; align-self: center; }
-  .featured .body p { margin-bottom: 0; }
-}
-.pill {
-  display: inline-block; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 5px 11px; border-radius: 999px; background: rgba(255, 181, 71, 0.14); color: var(--amber);
-}
-.featured h3 { font-size: 2rem; margin: 12px 0 8px; letter-spacing: -0.02em; line-height: 1.15; }
-.featured p { color: var(--muted); margin: 0 0 22px; }
-
-/* Game rows */
-.game { padding: 56px 0; border-top: 1px solid var(--line); }
-.game:first-of-type { border-top: 0; }
-.game .grid { display: grid; gap: 32px; align-items: center; }
-@media (min-width: 900px) {
-  .game .grid { grid-template-columns: 0.9fr 1.1fr; gap: 56px; }
-  .game.flip .grid { grid-template-columns: 1.1fr 0.9fr; }
-  .game.flip .info { order: 2; }
-  .shots { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; }
-}
-.title-row { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
-.app-icon { width: 72px; height: 72px; border-radius: 18px; flex: none; box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.6); }
-.game h3 { font-size: 1.9rem; line-height: 1.1; margin: 0 0 4px; letter-spacing: -0.02em; }
-.genre { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
-.game .info > p { color: var(--muted); margin: 0 0 16px; }
-.feats { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 8px; }
-.feats li { position: relative; padding-left: 26px; }
-.feats li::before {
-  content: ""; position: absolute; left: 0; top: 0.45em; width: 14px; height: 14px; border-radius: 4px;
-  background: var(--accent); transform: rotate(45deg) scale(0.7);
-}
-.links { display: flex; flex-wrap: wrap; gap: 10px; }
-.shots {
-  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(170px, 1fr); gap: 16px;
-  overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 4px 18px; margin: 0 -4px;
-  scrollbar-width: thin;
-}
-.shots > * { scroll-snap-align: start; }
-.shots.land { grid-auto-columns: minmax(280px, 1fr); }
-@media (max-width: 899px) { .shots { grid-auto-columns: 62%; } .shots.land { grid-auto-columns: 86%; } }
-.shots .phone:nth-child(2) { transform: translateY(-14px); }
-@media (max-width: 899px) { .shots .phone:nth-child(2) { transform: none; } }
-.land-stack { display: grid; gap: 16px; }
-.land-stack .wide:first-child { grid-column: 1 / -1; }
-@media (min-width: 600px) { .land-stack { grid-template-columns: 1fr 1fr; } }
-
-/* Promise */
-.promise { background: var(--bg2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.cards { display: grid; gap: 16px; grid-template-columns: 1fr; }
-@media (min-width: 600px) { .cards { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 960px) { .cards { grid-template-columns: repeat(3, 1fr); } }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
-.card svg { width: 40px; height: 40px; margin-bottom: 14px; }
-.card h3 { margin: 0 0 6px; font-size: 1.2rem; }
-.card p { margin: 0; color: var(--muted); font-size: 1rem; }
-
-/* Support */
-.support-box {
-  border-radius: 28px; padding: 40px 24px; text-align: center;
-  background: radial-gradient(120% 140% at 50% 0%, #3a2a66 0%, var(--card) 60%);
-  border: 1px solid var(--line);
-}
-@media (min-width: 700px) { .support-box { padding: 56px; } }
-.support-box p { color: var(--muted); max-width: 36rem; margin: 0 auto 24px; }
-.support-box .ctas { justify-content: center; }
-
-footer { padding: 48px 0 56px; color: var(--muted); font-size: 0.95rem; border-top: 1px solid var(--line); }
-footer .wrap { display: grid; gap: 28px; }
-@media (min-width: 800px) { footer .wrap { grid-template-columns: 1.3fr 1fr 1fr; } }
-footer h4 { color: var(--ink); margin: 0 0 10px; font-size: 0.95rem; }
-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
-footer ul a { text-decoration: none; display: inline-block; padding: 4px 0; }
-footer ul a:hover { color: var(--ink); text-decoration: underline; }
-footer p { margin: 0.3rem 0; }
-.fine { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
-
-a:focus-visible, .btn:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } .btn:hover { transform: none; } }
-</style>
+<meta property="og:url" content="https://freeplayinc.org/">
+<meta property="og:title" content="Free Play, Inc.">
+<meta property="og:description" content="Free games for Android with no ads, no tracking and nothing to buy. Apps and web sites too.">
+<meta property="og:image" content="https://freeplayinc.org/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/anybody-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument-sans-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to the content</a>
 
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="#">
-      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#ffb547"/><path d="M25 19v26l21-13z" fill="#110e1d"/></svg>
-      Play, Inc.
-    </a>
-    <nav class="nav" aria-label="Main">
-      <a href="#games">Games</a>
-      <a class="hide-sm" href="#promise">Our promise</a>
-      <a href="#support">Support</a>
-    </nav>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-coin" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="30.5" fill="#ffc81e" stroke="#0d0c11" stroke-width="3"/>
+    <circle cx="32" cy="32" r="23" fill="none" stroke="#0d0c11" stroke-width="1.6" stroke-dasharray="1.6 3.4" stroke-linecap="round"/>
+    <path d="M26.5 21v22L45 32z" fill="#0d0c11"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24">
+    <path d="M5 12h13M12.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>
+
+<header class="head" data-tone="ink">
+  <a class="brand" href="#top" aria-label="Free Play, Inc., back to the top">
+    <svg class="brand__coin" aria-hidden="true"><use href="#i-coin"/></svg>
+    <span>Free Play, Inc.</span>
+  </a>
+  <nav class="nav" id="nav" aria-label="Sections">
+    <a href="#story">Story</a>
+    <a href="#games">Games</a>
+    <a href="#apps">Apps</a>
+    <a href="#web">Web sites</a>
+    <a href="#rules">Rules</a>
+    <a href="#support">Contact</a>
+  </nav>
+  <div class="head__tools">
+    <button class="chip" id="sound" type="button" aria-pressed="false">Sound off</button>
+    <button class="chip chip--menu" id="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   </div>
 </header>
 
-<main>
-<section class="hero">
-  <div class="wrap">
-    <div>
-      <span class="eyebrow">Independent games for Android</span>
-      <h1>Games made to be <span class="grad">played, not sold.</span></h1>
-      <p class="lead">Play, Inc. makes free games for Android phones. No ads, no tracking and nothing to buy. Every game is open source, and every picture and sound in it is made in code.</p>
-      <div class="ctas">
-        <a class="btn primary" href="#games">See the games</a>
-        <a class="btn ghost" href="#promise">Our promise</a>
+<main id="main">
+
+<!-- Hero -->
+<section class="hero" id="top" data-head="ink">
+  <canvas class="hero__dots" id="dots" aria-hidden="true"></canvas>
+  <div class="hero__in">
+    <p class="readout hero__est"><span>Est. 9 Oct 2026</span><span class="blink">Credits: free play</span></p>
+
+    <h1 class="mega" id="mega" aria-label="Free Play, Inc.">
+      <span class="mega__line" aria-hidden="true"><span class="l">F</span><span class="l">R</span><span class="l">E</span><span class="l">E</span></span>
+      <span class="mega__line" aria-hidden="true"><span class="l">P</span><span class="l">L</span><span class="l">A</span><span class="l">Y</span></span>
+    </h1>
+
+    <div class="hero__row">
+      <div class="hero__copy">
+        <p class="hero__lede">We make games, apps and web sites. The games cost nothing: there are no ads in them, no tracking and nothing to buy. It started on 9 October 2026 with a red balloon.</p>
+        <div class="btns">
+          <a class="btn btn--solid" href="#games">See the games <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn" href="#story">Read the story</a>
+        </div>
       </div>
-    </div>
-    <div class="collage" aria-hidden="true">
-      <div class="phone p1"><img src="img/sumup/chain.webp" width="540" height="960" alt=""></div>
-      <div class="phone p2"><img src="img/forkline/wave.webp" width="540" height="1080" alt=""></div>
-      <div class="phone p3"><img src="img/woodlogic/board.webp" width="540" height="960" alt=""></div>
+
+      <div class="arcade" id="arcade">
+        <div class="machine">
+          <div class="machine__sign readout" aria-hidden="true">
+            <span class="machine__old">Insert coin</span>
+            <span class="machine__new">Free play</span>
+          </div>
+          <div class="machine__plate">
+            <div class="slot" id="slot"><i></i></div>
+            <div class="tray" id="tray"><span class="readout">Return</span></div>
+          </div>
+          <p class="machine__msg readout" id="coinmsg" aria-live="polite">Drag the coin to the slot.</p>
+        </div>
+        <button class="coin" id="coin" type="button" aria-label="Insert the coin">
+          <svg aria-hidden="true"><use href="#i-coin"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="stats">
-  <ul>
-    <li><b>5</b><span>games</span></li>
-    <li><b>0</b><span>ads and trackers</span></li>
-    <li><b>0</b><span>things to buy</span></li>
-    <li><b>100%</b><span>open source</span></li>
-  </ul>
+<!-- Ticker -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span>Free to play</span><i></i><span>No ads</span><i></i><span>No tracking</span><i></i><span>Nothing to buy</span><i></i><span>Works offline</span><i></i><span>Open source</span><i></i><span>Made in code</span><i></i>
+    <span>Free to play</span><i></i><span>No ads</span><i></i><span>No tracking</span><i></i><span>Nothing to buy</span><i></i><span>Works offline</span><i></i><span>Open source</span><i></i><span>Made in code</span><i></i>
+  </div>
 </div>
 
-<section id="games">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Coming next</span>
-      <h2>Forkline</h2>
-      <p>Our biggest game yet, now in testing.</p>
+<!-- Story -->
+<section class="story" id="story" data-head="ink">
+  <div class="wrap story__grid">
+    <div class="story__text">
+      <p class="eyebrow" data-rv>The story so far</p>
+      <h2 class="h2" data-rv>It started with a red balloon.</h2>
+      <p class="big" data-rv>On 9 October 2026 we opened a repository called Updraft. A kid lets go of a balloon in a bedroom, and you tilt your phone to fly it out of the house. That was the whole company.</p>
+      <p data-rv>Four more games started in the next seventeen days. Then a deli needed to change prices on its three label scales, so we wrote ScaleConnect. Then a food tracker, because typing in a whole meal should take one screen. Then the web sites, including the one you're reading.</p>
+      <p data-rv>The table shows the order. Nothing in it is older than that balloon.</p>
+      <ul class="tally" data-rv>
+        <li><b>5</b> games</li>
+        <li><b>4</b> apps</li>
+        <li><b>5</b> web sites</li>
+        <li><b>0</b> ads</li>
+      </ul>
     </div>
-    <div class="featured">
-      <div class="art"><img src="img/forkline/feature.webp" width="1024" height="500" alt="Forkline: a lantern-lit watch post beside a forked road at dusk, with night creatures coming down it."></div>
-      <div class="body">
-        <span class="pill">In testing</span>
-        <h3>Tower defense where the roads fork.</h3>
-        <p>Night creatures come down the roads of a hillside village. Build towers beside them and place gates to send the creatures down the branch you choose. 48 levels in 8 regions, roguelite runs and a daily challenge.</p>
-        <div class="links">
-          <a class="btn primary small" href="https://github.com/bartbasi/forkline/releases">Get the test build</a>
-          <a class="btn ghost small" href="#forkline">More about Forkline</a>
-        </div>
-      </div>
+
+    <div class="scores" data-rv>
+      <p class="scores__title readout">Order of play</p>
+      <ol class="scores__list readout">
+        <li><a href="#updraft"><span>1st</span><span>Updraft</span><span>Game</span><time datetime="2026-10-09">09 Oct</time></a></li>
+        <li><a href="#sumup"><span>2nd</span><span>SumUp</span><span>Game</span><time datetime="2026-10-11">11 Oct</time></a></li>
+        <li><a href="#boardgames"><span>3rd</span><span>Board Game Collector</span><span>App</span><time datetime="2026-10-11">11 Oct</time></a></li>
+        <li><a href="#sudoku"><span>4th</span><span>Sudoku</span><span>Game</span><time datetime="2026-10-12">12 Oct</time></a></li>
+        <li><a href="#woodlogic"><span>5th</span><span>WoodLogic</span><span>Game</span><time datetime="2026-10-19">19 Oct</time></a></li>
+        <li><a href="#forkline"><span>6th</span><span>Forkline</span><span>Game</span><time datetime="2026-10-26">26 Oct</time></a></li>
+        <li><a href="#scaleconnect"><span>7th</span><span>ScaleConnect</span><span>App</span><time datetime="2026-10-30">30 Oct</time></a></li>
+        <li><a href="#daybook"><span>8th</span><span>Daybook</span><span>App</span><time datetime="2026-11-08">08 Nov</time></a></li>
+        <li><a href="#web"><span>9th</span><span>bartbasi.com</span><span>Web</span><time datetime="2026-11-12">12 Nov</time></a></li>
+        <li><a href="#web"><span>10th</span><span>freeplayinc.org</span><span>Web</span><time datetime="2026-11-12">12 Nov</time></a></li>
+      </ol>
+      <p class="scores__note">Dates are when each repository opened on GitHub, all in 2026.</p>
     </div>
   </div>
 </section>
 
-<section style="padding-top: 0;">
+<!-- Games -->
+<section class="chapter chapter--games" id="games" data-head="light">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Our games</span>
-      <h2>Five games, all free.</h2>
-      <p>Each one plays offline, keeps your progress on your phone and asks for no Android permissions.</p>
+    <p class="eyebrow" data-rv>Chapter one</p>
+    <h2 class="h2 h2--xl" data-rv>Five games, all free.</h2>
+    <div class="chapter__cols">
+      <p class="big" data-rv>Each one plays offline, keeps your progress on your phone and asks for no Android permissions.</p>
+      <p data-rv>They are built in Godot 4, and every picture, effect, sound and song is made by the game's own code. The source is public. Here they are in the order they started.</p>
     </div>
+  </div>
+</section>
 
-    <article class="game" id="forkline" style="--accent: #ffb547;">
-      <div class="grid">
-        <div class="info">
-          <div class="title-row">
-            <img class="app-icon" src="img/forkline/icon.png" width="192" height="192" alt="">
-            <div><h3>Forkline</h3><span class="genre">Tower defense</span></div>
-          </div>
-          <p>A cozy storybook village at dusk. Solve each map like a puzzle in the build phase, then watch your defense work as the waves come down the roads.</p>
-          <ul class="feats">
-            <li>Gates you place to steer creatures down each fork</li>
-            <li>A campaign of 48 levels, each with stars and a Twist</li>
-            <li>Roguelite runs with card picks, and a daily challenge</li>
-            <li>A landscape layout on a foldable's inner screen</li>
-          </ul>
-          <div class="links">
-            <a class="btn primary small" href="https://github.com/bartbasi/forkline/releases">Test builds</a>
-            <a class="btn ghost small" href="https://bartbasi.github.io/forkline/">Game site</a>
-            <a class="btn ghost small" href="https://github.com/bartbasi/forkline">Source code</a>
-            <a class="btn ghost small" href="https://bartbasi.github.io/forkline/privacy-policy/">Privacy</a>
-          </div>
-        </div>
-        <div class="shots">
-          <div class="phone"><img src="img/forkline/build.webp" width="540" height="1080" loading="lazy" alt="Forkline build phase: towers beside a forked road, with a gate closing one branch."></div>
-          <div class="phone"><img src="img/forkline/wave.webp" width="540" height="1080" loading="lazy" alt="Forkline during a wave: creatures on the road and towers firing."></div>
-          <div class="phone"><img src="img/forkline/levels.webp" width="540" height="1080" loading="lazy" alt="Forkline campaign list with stars earned on each level."></div>
-        </div>
-      </div>
-    </article>
+<div class="stack" id="stack">
 
-    <article class="game flip" id="sumup" style="--accent: #ff5d9e;">
-      <div class="grid">
-        <div class="info">
-          <div class="title-row">
-            <img class="app-icon" src="img/sumup/icon.png" width="192" height="192" alt="">
-            <div><h3>SumUp</h3><span class="genre">Number puzzle</span></div>
+  <article class="game game--updraft" id="updraft" data-head="ink">
+    <div class="game__card">
+      <div class="game__in">
+        <div class="game__info">
+          <p class="game__meta readout"><span>01 / 05</span><span>Started 9 Oct 2026</span></p>
+          <div class="game__name">
+            <img class="game__icon" src="/img/updraft/icon.webp" width="192" height="192" alt="">
+            <h3>Updraft</h3>
           </div>
-          <p>A calm, clever number puzzle. Drag across matching tiles to join them into one bigger number, then keep going and see how high you can climb.</p>
-          <ul class="feats">
-            <li>Chains in eight directions, each tile the same or double</li>
-            <li>Boosters paid for with your score, never with money</li>
-            <li>Three complete looks: Gumdrop, Slate and Nova</li>
-          </ul>
-          <div class="links">
-            <a class="btn ghost small" href="https://bartbasi.github.io/SumUp/">Game site</a>
-            <a class="btn ghost small" href="https://github.com/bartbasi/SumUp">Source code</a>
-            <a class="btn ghost small" href="https://bartbasi.github.io/SumUp/privacy/">Privacy</a>
-          </div>
-        </div>
-        <div class="shots">
-          <div class="phone"><img src="img/sumup/chain.webp" width="540" height="960" loading="lazy" alt="SumUp in the Gumdrop look: a chain of matching tiles being joined."></div>
-          <div class="phone"><img src="img/sumup/nova.webp" width="540" height="960" loading="lazy" alt="SumUp in the Nova look, with round glowing tiles."></div>
-          <div class="phone"><img src="img/sumup/slate.webp" width="540" height="960" loading="lazy" alt="SumUp in the Slate look, with flat square tiles."></div>
-        </div>
-      </div>
-    </article>
-
-    <article class="game" id="updraft" style="--accent: #ff6a5a;">
-      <div class="grid">
-        <div class="info">
-          <div class="title-row">
-            <img class="app-icon" src="img/updraft/icon.png" width="192" height="192" alt="">
-            <div><h3>Updraft</h3><span class="genre">Tilt to fly</span></div>
-          </div>
-          <p>A kid lets go of a little red balloon in the bedroom, and you take it from there. Tilt your phone to ride warm air out of the house, over the valley and beyond.</p>
+          <p class="tag">Tilt to fly</p>
+          <p class="game__lede">A kid lets go of a little red balloon in the bedroom, and you take it from there. Tilt your phone to ride warm air out of the house, over the valley and beyond.</p>
           <ul class="feats">
             <li>A red balloon or a folded paper plane</li>
             <li>Sunbeams, kettle steam, thermals and ridge wind</li>
             <li>An Endless country to explore, and a daily flight</li>
+            <li>A run lasts one to two and a half minutes</li>
           </ul>
-          <div class="links">
-            <a class="btn ghost small" href="https://bartbasi.github.io/Updraft/">Game site</a>
-            <a class="btn ghost small" href="https://github.com/bartbasi/Updraft">Source code</a>
-            <a class="btn ghost small" href="https://bartbasi.github.io/Updraft/privacy-policy/">Privacy</a>
+          <div class="btns">
+            <a class="btn btn--solid" href="https://bartbasi.github.io/Updraft/">Game site <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/bartbasi/Updraft">Source code</a>
+            <a class="btn" href="https://bartbasi.github.io/Updraft/privacy-policy/">Privacy</a>
           </div>
         </div>
-        <div class="land-stack">
-          <div class="phone wide"><img src="img/updraft/valley.webp" width="960" height="540" loading="lazy" alt="Updraft: the red balloon rising over a green valley with a gull and sheep below."></div>
-          <div class="phone wide"><img src="img/updraft/sunbeam.webp" width="960" height="540" loading="lazy" alt="Updraft: the balloon riding a sunbeam down a long hallway."></div>
-          <div class="phone wide"><img src="img/updraft/viaduct.webp" width="960" height="540" loading="lazy" alt="Updraft: the balloon flying under the arches of a viaduct toward a star."></div>
+        <div class="shots shots--land">
+          <figure class="shot" data-speed="-30"><img src="/img/updraft/valley.webp" width="1280" height="720" loading="lazy" alt="Updraft: the red balloon rising over a green valley, with a gull alongside."></figure>
+          <figure class="shot" data-speed="20"><img src="/img/updraft/sunbeam.webp" width="1280" height="720" loading="lazy" alt="Updraft: the balloon riding a sunbeam down a long hallway."></figure>
+          <figure class="shot" data-speed="45"><img src="/img/updraft/kettle.webp" width="1280" height="720" loading="lazy" alt="Updraft: the balloon leaving through the kitchen window on kettle steam."></figure>
+          <figure class="shot" data-speed="70"><img src="/img/updraft/viaduct.webp" width="1280" height="720" loading="lazy" alt="Updraft: the balloon flying under the arches of a viaduct toward a star."></figure>
         </div>
       </div>
-    </article>
+    </div>
+  </article>
 
-    <article class="game flip" id="woodlogic" style="--accent: #e0a94a;">
-      <div class="grid">
-        <div class="info">
-          <div class="title-row">
-            <img class="app-icon" src="img/woodlogic/icon.png" width="192" height="192" alt="">
-            <div><h3>WoodLogic</h3><span class="genre">Screw puzzle</span></div>
+  <article class="game game--sumup" id="sumup" data-head="light">
+    <div class="game__card">
+      <div class="game__in">
+        <div class="game__info">
+          <p class="game__meta readout"><span>02 / 05</span><span>Started 11 Oct 2026</span></p>
+          <div class="game__name">
+            <img class="game__icon" src="/img/sumup/icon.webp" width="192" height="192" alt="">
+            <h3>SumUp</h3>
           </div>
-          <p>A wooden picture hangs on the board, held on by colored screws. Tap a screw to spin it out and fill the boxes. Plan ahead, because the tray is small.</p>
+          <p class="tag">Number puzzle</p>
+          <p class="game__lede">A calm, clever number puzzle. Drag across matching tiles to join them into one bigger number, then keep going and see how high you can climb.</p>
+          <ul class="feats">
+            <li>Chains in eight directions, each tile the same or double</li>
+            <li>Boosters paid for with your score, never with money</li>
+            <li>Three complete looks: Gumdrop, Slate and Nova</li>
+            <li>An endless mode</li>
+          </ul>
+          <div class="btns">
+            <a class="btn btn--solid" href="https://bartbasi.github.io/SumUp/">Game site <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/bartbasi/SumUp">Source code</a>
+            <a class="btn" href="https://bartbasi.github.io/SumUp/privacy/">Privacy</a>
+          </div>
+        </div>
+        <div class="shots">
+          <figure class="shot" data-speed="50"><img src="/img/sumup/nova.webp" width="540" height="960" loading="lazy" alt="SumUp in the Nova look, with round glowing tiles."></figure>
+          <figure class="shot" data-speed="-20"><img src="/img/sumup/chain.webp" width="540" height="960" loading="lazy" alt="SumUp in the Gumdrop look: a chain of matching tiles being joined."></figure>
+          <figure class="shot" data-speed="80"><img src="/img/sumup/slate.webp" width="540" height="960" loading="lazy" alt="SumUp in the Slate look, with flat square tiles."></figure>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="game game--sudoku" id="sudoku" data-head="ink">
+    <div class="game__card">
+      <div class="game__in">
+        <div class="game__info">
+          <p class="game__meta readout"><span>03 / 05</span><span>Started 12 Oct 2026</span></p>
+          <div class="game__name">
+            <img class="game__icon" src="/img/sudoku/icon.webp" width="192" height="192" alt="">
+            <h3>Sudoku</h3>
+          </div>
+          <p class="tag">Logic puzzle</p>
+          <p class="game__lede">Sudoku where every empty cell shows all nine candidates around its edge, and you cross them out by hand as you rule them out.</p>
+          <ul class="feats">
+            <li>Five levels, from Beginner to Expert</li>
+            <li>Hints that point the way and never fill in for you</li>
+            <li>Lessons that teach each technique</li>
+            <li>A dark look</li>
+          </ul>
+          <div class="btns">
+            <a class="btn btn--solid" href="https://bartbasi.github.io/Sudoku/">Game site <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/bartbasi/Sudoku">Source code</a>
+            <a class="btn" href="https://bartbasi.github.io/Sudoku/privacy/">Privacy</a>
+          </div>
+        </div>
+        <div class="shots">
+          <figure class="shot" data-speed="50"><img src="/img/sudoku/hint.webp" width="540" height="898" loading="lazy" alt="Sudoku showing a lesson hint: in this box, 6 fits in only one cell."></figure>
+          <figure class="shot" data-speed="-20"><img src="/img/sudoku/play.webp" width="540" height="898" loading="lazy" alt="Sudoku in the light look: candidates around each cell, some crossed out."></figure>
+          <figure class="shot" data-speed="80"><img src="/img/sudoku/play-dark.webp" width="540" height="898" loading="lazy" alt="Sudoku in the dark look."></figure>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="game game--woodlogic" id="woodlogic" data-head="light">
+    <div class="game__card">
+      <div class="game__in">
+        <div class="game__info">
+          <p class="game__meta readout"><span>04 / 05</span><span>Started 19 Oct 2026</span></p>
+          <div class="game__name">
+            <img class="game__icon" src="/img/woodlogic/icon.webp" width="192" height="192" alt="">
+            <h3>WoodLogic</h3>
+          </div>
+          <p class="tag">Screw puzzle</p>
+          <p class="game__lede">A wooden picture hangs on the board, held on by colored screws. Tap a screw to spin it out and fill the boxes. Plan ahead, because the tray is small.</p>
           <ul class="feats">
             <li>Levels made on your phone and checked by a solver</li>
             <li>A Daily puzzle, and a Relaxed mode with no clock</li>
             <li>Woods and metals to unlock just by playing</li>
+            <li>Levels never run out</li>
           </ul>
-          <div class="links">
-            <a class="btn ghost small" href="https://bartbasi.github.io/WoodLogic/">Game site</a>
-            <a class="btn ghost small" href="https://github.com/bartbasi/WoodLogic">Source code</a>
-            <a class="btn ghost small" href="https://bartbasi.github.io/WoodLogic/privacy-policy/">Privacy</a>
+          <div class="btns">
+            <a class="btn btn--solid" href="https://bartbasi.github.io/WoodLogic/">Game site <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://github.com/bartbasi/WoodLogic">Source code</a>
+            <a class="btn" href="https://bartbasi.github.io/WoodLogic/privacy-policy/">Privacy</a>
           </div>
         </div>
         <div class="shots">
-          <div class="phone"><img src="img/woodlogic/board.webp" width="540" height="960" loading="lazy" alt="WoodLogic: wooden planks held by colored screws, with boxes to fill at the top."></div>
-          <div class="phone"><img src="img/woodlogic/home.webp" width="540" height="960" loading="lazy" alt="WoodLogic home screen with Play, Daily and Relaxed."></div>
-          <div class="phone"><img src="img/woodlogic/map.webp" width="540" height="960" loading="lazy" alt="WoodLogic progress map with stars on finished levels."></div>
+          <figure class="shot" data-speed="50"><img src="/img/woodlogic/home.webp" width="540" height="960" loading="lazy" alt="WoodLogic home screen with Play, Daily and Relaxed."></figure>
+          <figure class="shot" data-speed="-20"><img src="/img/woodlogic/board.webp" width="540" height="960" loading="lazy" alt="WoodLogic: wooden planks held by colored screws, with boxes to fill at the top."></figure>
+          <figure class="shot" data-speed="80"><img src="/img/woodlogic/map.webp" width="540" height="960" loading="lazy" alt="WoodLogic progress map with stars on finished levels."></figure>
         </div>
       </div>
-    </article>
+    </div>
+  </article>
 
-    <article class="game" id="sudoku" style="--accent: #6f8bff;">
-      <div class="grid">
-        <div class="info">
-          <div class="title-row">
-            <img class="app-icon" src="img/sudoku/icon.png" width="192" height="192" alt="">
-            <div><h3>Sudoku</h3><span class="genre">Logic puzzle</span></div>
+  <article class="game game--forkline" id="forkline" data-head="light">
+    <div class="game__card">
+      <div class="game__in">
+        <div class="game__info">
+          <p class="game__meta readout"><span>05 / 05</span><span>Started 26 Oct 2026</span><span class="game__flag">In testing</span></p>
+          <div class="game__name">
+            <img class="game__icon" src="/img/forkline/icon.webp" width="192" height="192" alt="">
+            <h3>Forkline</h3>
           </div>
-          <p>Sudoku where every empty cell shows all nine candidates around its edge, and you cross them out by hand as you rule them out.</p>
+          <p class="tag">Tower defense where the roads fork</p>
+          <p class="game__lede">A cozy storybook village at dusk. Solve each map like a puzzle in the build phase, then watch your defense work as the waves come down the roads. It is our biggest game yet.</p>
           <ul class="feats">
-            <li>Five levels, from Beginner to Expert</li>
-            <li>Hints that point the way and never fill in for you</li>
-            <li>Lessons that teach each technique, and a dark look</li>
+            <li>Gates you place to steer creatures down each fork</li>
+            <li>A campaign of 48 levels in 8 regions, each with stars and a Twist</li>
+            <li>Roguelite runs with card picks, and a daily challenge</li>
+            <li>A landscape layout on a foldable's inner screen</li>
           </ul>
-          <div class="links">
-            <a class="btn ghost small" href="https://bartbasi.github.io/Sudoku/">Game site</a>
-            <a class="btn ghost small" href="https://github.com/bartbasi/Sudoku">Source code</a>
-            <a class="btn ghost small" href="https://bartbasi.github.io/Sudoku/privacy/">Privacy</a>
+          <div class="btns">
+            <a class="btn btn--solid" href="https://github.com/bartbasi/forkline/releases">Get the test build <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn" href="https://bartbasi.github.io/forkline/">Game site</a>
+            <a class="btn" href="https://github.com/bartbasi/forkline">Source code</a>
+            <a class="btn" href="https://bartbasi.github.io/forkline/privacy-policy/">Privacy</a>
           </div>
         </div>
         <div class="shots">
-          <div class="phone"><img src="img/sudoku/play.webp" width="540" height="898" loading="lazy" alt="Sudoku in the light look: candidates around each cell, some crossed out."></div>
-          <div class="phone"><img src="img/sudoku/hint.webp" width="540" height="898" loading="lazy" alt="Sudoku showing a lesson hint: in this box, 6 fits in only one cell."></div>
-          <div class="phone"><img src="img/sudoku/play-dark.webp" width="540" height="898" loading="lazy" alt="Sudoku in the dark look."></div>
+          <figure class="shot" data-speed="50"><img src="/img/forkline/home.webp" width="600" height="1200" loading="lazy" alt="Forkline front door: the title over a small village map, with a Play button."></figure>
+          <figure class="shot" data-speed="-20"><img src="/img/forkline/wave.webp" width="600" height="1200" loading="lazy" alt="Forkline during a wave: creatures on the road and towers firing."></figure>
+          <figure class="shot" data-speed="80"><img src="/img/forkline/build.webp" width="600" height="1200" loading="lazy" alt="Forkline build phase: towers beside a forked road, with a gate closing one branch."></figure>
         </div>
       </div>
+    </div>
+  </article>
+
+</div>
+
+<!-- Apps -->
+<section class="chapter chapter--apps" id="apps" data-head="ink">
+  <div class="wrap">
+    <p class="eyebrow" data-rv>Chapter two</p>
+    <h2 class="h2 h2--xl" data-rv>Then the apps.</h2>
+    <div class="chapter__cols">
+      <p class="big" data-rv>Four so far. Two are at work in a deli. Two are early, and their screenshots say so.</p>
+      <p data-rv>The first one started two days after the balloon. Three of the four have public source code.</p>
+    </div>
+  </div>
+
+  <div class="wrap apps">
+
+    <article class="app" id="scaleconnect">
+      <div class="app__info">
+        <p class="status status--live readout" data-rv>In daily use</p>
+        <h3 class="h3" data-rv>ScaleConnect</h3>
+        <p class="big" data-rv>Add, edit and delete products on Tor-rey label scales from a web page, the command line, or Claude through MCP.</p>
+        <p data-rv>It was built for one deli with three scales, where it has run every day since November 2026. Every change is a preview first and then an apply. It reads each scale before it writes, and a change counts as done only after the scale has been read back.</p>
+        <dl class="spec" data-rv>
+          <div><dt>Built with</dt><dd>Python, FastAPI and the MCP Python SDK</dd></div>
+          <div><dt>Ways in</dt><dd>A web page for staff, a command line tool, an MCP server for Claude</dd></div>
+          <div><dt>Limits</dt><dd>It only adds and edits product records. It never touches calibration.</dd></div>
+          <div><dt>License</dt><dd>GNU GPL v3 with additional terms. Copyright 2026 Cheese &amp; Crackers, Inc.</dd></div>
+        </dl>
+        <p class="fine" data-rv>ScaleConnect is not affiliated with, endorsed by, or supported by Tor-rey.</p>
+        <div class="btns" data-rv>
+          <a class="btn btn--solid" href="https://github.com/bartbasi/ScaleConnect">Source code <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <div class="app__visual" data-rv>
+        <div class="browser" id="sc-browser">
+          <div class="browser__bar"><i></i><i></i><i></i><span>Scale Prices</span></div>
+          <div class="browser__view">
+            <img class="is-on" src="/img/scaleconnect/items.webp" width="1280" height="800" loading="lazy" alt="ScaleConnect staff page: a list of items with their PLU numbers and prices.">
+            <img src="/img/scaleconnect/edit.webp" width="1280" height="800" loading="lazy" alt="ScaleConnect staff page: the edit form for one item with a new price typed in.">
+            <img src="/img/scaleconnect/preview.webp" width="1280" height="800" loading="lazy" alt="ScaleConnect staff page: the review step, showing what will change on each scale.">
+            <img src="/img/scaleconnect/result.webp" width="1280" height="800" loading="lazy" alt="ScaleConnect staff page: the result for each of the three scales after a change.">
+          </div>
+          <div class="browser__tabs" role="group" aria-label="ScaleConnect screens">
+            <button type="button" class="is-on" aria-pressed="true">Find</button>
+            <button type="button" aria-pressed="false">Edit</button>
+            <button type="button" aria-pressed="false">Review</button>
+            <button type="button" aria-pressed="false">Result</button>
+          </div>
+        </div>
+        <p class="cap">The staff page, running against the project's test scale. The items are made up.</p>
+      </div>
     </article>
+
+    <article class="app app--flip" id="shelfready">
+      <div class="app__info">
+        <p class="status status--live readout" data-rv>At the deli</p>
+        <h3 class="h3" data-rv>ShelfReady</h3>
+        <p class="big" data-rv>Someone takes a photo of a supplier invoice. ShelfReady turns that photo into prices, Square inventory updates, scale updates and shelf labels.</p>
+        <p data-rv>It also sends the deli&rsquo;s fish order emails.</p>
+        <dl class="spec" data-rv>
+          <div><dt>Built for</dt><dd>Cheese &amp; Crackers, a gourmet deli in Champaign, Illinois</dd></div>
+          <div><dt>Goes in</dt><dd>One photo of an invoice</dd></div>
+          <div><dt>Comes out</dt><dd>Prices, Square inventory updates, scale updates, shelf labels</dd></div>
+        </dl>
+      </div>
+      <div class="app__visual" data-rv>
+        <div class="flow" role="img" aria-label="Drawing: a photo of a supplier invoice goes into ShelfReady, which produces prices, Square inventory updates, scale updates and shelf labels.">
+          <div class="flow__doc" aria-hidden="true">
+            <b>Invoice</b>
+            <i></i><i></i><i></i><i></i><i></i>
+            <span class="flow__snap"></span>
+          </div>
+          <div class="flow__pipe" aria-hidden="true"></div>
+          <div class="flow__core" aria-hidden="true">ShelfReady</div>
+          <div class="flow__pipe flow__pipe--fan" aria-hidden="true"></div>
+          <ul class="flow__out" aria-hidden="true">
+            <li>Prices</li>
+            <li>Square inventory</li>
+            <li>Scale updates</li>
+            <li>Shelf labels</li>
+          </ul>
+        </div>
+        <p class="cap">A drawing of what goes in and what comes out.</p>
+      </div>
+    </article>
+
+    <article class="app" id="daybook">
+      <div class="app__info">
+        <p class="status readout" data-rv>Early development</p>
+        <h3 class="h3" data-rv>Daybook</h3>
+        <p class="big" data-rv>A free, open source tracker for food, macros, micronutrients, body weight, resistance training and cardio.</p>
+        <p data-rv>The whole point is speed of entry: type a whole meal on one screen, log a set in one tap, log your weight in under five seconds. There are no ads, no accounts and no tracking, and your data stays on your phone.</p>
+        <dl class="spec" data-rv>
+          <div><dt>Built with</dt><dd>Flutter, for Android and iOS</dd></div>
+          <div><dt>Food data</dt><dd>13,598 foods from USDA FoodData Central ship inside the app, so it works offline at first launch</dd></div>
+          <div><dt>Barcodes</dt><dd>Open Food Facts, the app's only network call</dd></div>
+          <div><dt>Where it is</dt><dd>Phase 2 of 6. The database and the food data work. The screens come next.</dd></div>
+          <div><dt>License</dt><dd>GNU GPL v3 with additional terms</dd></div>
+        </dl>
+        <div class="btns" data-rv>
+          <a class="btn btn--solid" href="https://github.com/bartbasi/daybook">Source code <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <div class="app__visual" data-rv>
+        <div class="typed" id="typed">
+          <p class="typed__label readout">Breakfast, one line</p>
+          <p class="typed__line"><span id="typed-text">2 eggs, 2 slices sourdough toast, 1 tbsp butter, coffee with 2 tbsp half and half</span><i class="typed__caret" aria-hidden="true"></i></p>
+          <ul class="typed__rows" aria-hidden="true">
+            <li>2 eggs</li>
+            <li>2 slices sourdough toast</li>
+            <li>1 tbsp butter</li>
+            <li>coffee with 2 tbsp half and half</li>
+          </ul>
+        </div>
+        <p class="cap">The example from the product brief: one typed line becomes four entries. This screen isn't built yet.</p>
+      </div>
+    </article>
+
+    <article class="app app--flip" id="boardgames">
+      <div class="app__info">
+        <p class="status readout" data-rv>Early development</p>
+        <h3 class="h3" data-rv>Board Game Collector</h3>
+        <p class="big" data-rv>An app for board game collectors. Scan a game box or search by title, see current eBay US asking prices, and file the game as Owned, Wanted or Evaluating.</p>
+        <p data-rv>The collection lives only on the phone, with no accounts and no tracking. A small backend does the lookups.</p>
+        <dl class="spec" data-rv>
+          <div><dt>Built with</dt><dd>Flutter for iOS and Android, with a Dart backend</dd></div>
+          <div><dt>Where it is</dt><dd>The app shell and barcode entry exist. The scan screen is honest about the rest.</dd></div>
+        </dl>
+        <div class="btns" data-rv>
+          <a class="btn btn--solid" href="https://github.com/bartbasi/Boardgames">Source code <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <div class="app__visual" data-rv>
+        <div class="shots shots--two">
+          <figure class="shot"><img src="/img/boardgames/scan.webp" width="780" height="1688" loading="lazy" alt="Board Game Collector scan screen. It reads: This screen is not built yet."></figure>
+          <figure class="shot"><img src="/img/boardgames/enter.webp" width="780" height="1688" loading="lazy" alt="Board Game Collector barcode entry screen with a Look up button."></figure>
+        </div>
+        <p class="cap">Real screens from the app's own test suite, taken as they are today.</p>
+      </div>
+    </article>
+
   </div>
 </section>
 
-<section class="promise" id="promise">
+<!-- Web -->
+<section class="chapter chapter--web" id="web" data-head="light">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Our promise</span>
-      <h2>Every game follows the same rules.</h2>
-      <p>No exceptions, and no fine print.</p>
-    </div>
-    <div class="cards">
-      <div class="card">
-        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#ffb547" opacity="0.18"/><path d="M13 21l5 5 10-12" fill="none" stroke="#ffb547" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Free, for good</h3>
-        <p>No ads and nothing to buy. Everything in the game is earned by playing.</p>
+    <div class="desk" id="desk">
+      <div class="desk__intro">
+        <p class="eyebrow" data-rv>Chapter three</p>
+        <h2 class="h2" data-rv>Then the web sites.</h2>
+        <p class="big" data-rv>Five so far, counting the one you're reading.</p>
+        <p class="desk__hint" data-rv>Hover a window to scroll its page. Drag the windows around if you like.</p>
       </div>
-      <div class="card">
-        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#3fe0c5" opacity="0.18"/><circle cx="20" cy="20" r="8" fill="none" stroke="#3fe0c5" stroke-width="3"/><path d="M11 29L29 11" stroke="#3fe0c5" stroke-width="3" stroke-linecap="round"/></svg>
-        <h3>No tracking</h3>
-        <p>No accounts, no analytics and no tracking of any kind.</p>
-      </div>
-      <div class="card">
-        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#ff6f6f" opacity="0.18"/><path d="M12 17a12 12 0 0 1 16 0M15 21a7 7 0 0 1 10 0" fill="none" stroke="#ff6f6f" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="26" r="2.2" fill="#ff6f6f"/><path d="M11 30L29 12" stroke="#ff6f6f" stroke-width="3" stroke-linecap="round"/></svg>
-        <h3>Fully offline</h3>
-        <p>The games never connect to the internet and ask for no Android permissions.</p>
-      </div>
-      <div class="card">
-        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#c86bff" opacity="0.18"/><rect x="13" y="9" width="14" height="22" rx="3" fill="none" stroke="#c86bff" stroke-width="3"/><circle cx="20" cy="26" r="1.8" fill="#c86bff"/></svg>
-        <h3>Your phone, your progress</h3>
-        <p>Saves stay on your phone. Nothing is sent anywhere.</p>
-      </div>
-      <div class="card">
-        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#6f8bff" opacity="0.18"/><path d="M16 13l-7 7 7 7M24 13l7 7-7 7" fill="none" stroke="#6f8bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Open source</h3>
-        <p>Every game's source code is public, under the GNU GPL v3 with additional terms.</p>
-      </div>
-      <div class="card">
-        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#e0a94a" opacity="0.18"/><path d="M12 28l4-12 4 8 3-5 5 9z" fill="none" stroke="#e0a94a" stroke-width="3" stroke-linejoin="round"/><circle cx="26" cy="13" r="2.5" fill="#e0a94a"/></svg>
-        <h3>Made in code</h3>
-        <p>Every picture, effect, sound and song is made by the game's own code.</p>
-      </div>
+
+      <article class="win" data-rv>
+        <div class="win__bar"><i></i><i></i><i></i><span>bartbasi.com</span></div>
+        <a class="win__shot" href="https://bartbasi.com/" tabindex="-1" aria-hidden="true"><img src="/img/web/bartbasi.webp" width="1100" height="2063" loading="lazy" alt=""></a>
+        <div class="win__body">
+          <h3>bartbasi.com</h3>
+          <p>Bart Basi's personal site. One set of page sources builds both a static site and a WordPress theme, and tests compare the two pixel by pixel. No trackers and no cookies.</p>
+          <a class="link" href="https://bartbasi.com/">Visit bartbasi.com <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </article>
+
+      <article class="win" data-rv>
+        <div class="win__bar"><i></i><i></i><i></i><span>new.crackerscheese.com</span></div>
+        <a class="win__shot" href="https://new.crackerscheese.com/" tabindex="-1" aria-hidden="true"><img src="/img/web/crackerscheese.webp" width="1100" height="1957" loading="lazy" alt=""></a>
+        <div class="win__body">
+          <h3>Cheese &amp; Crackers</h3>
+          <p>The rebuilt site for a gourmet deli, seafood market and artisan grocery in Champaign, Illinois. It has the menu, box lunches, catering and the fresh fish email. Built on WordPress.</p>
+          <a class="link" href="https://new.crackerscheese.com/">Visit the new site <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </article>
+
+      <article class="win" data-rv>
+        <div class="win__bar"><i></i><i></i><i></i><span>cupm.net</span></div>
+        <a class="win__shot" href="https://cupm.net/" tabindex="-1" aria-hidden="true"><img src="/img/web/cupm.webp" width="1100" height="2063" loading="lazy" alt=""></a>
+        <div class="win__body">
+          <h3>Champaign Urbana Property Management</h3>
+          <p>The site for a property management company in Savoy, Illinois, with its services, pricing, rentals, and the tenant and investor portals. Built on WordPress.</p>
+          <a class="link" href="https://cupm.net/">Visit cupm.net <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </article>
+
+      <article class="win" data-rv>
+        <div class="win__bar"><i></i><i></i><i></i><span>financeillinois.com</span></div>
+        <a class="win__shot" href="https://financeillinois.com/" tabindex="-1" aria-hidden="true"><img src="/img/web/financeillinois.webp" width="1100" height="2063" loading="lazy" alt=""></a>
+        <div class="win__body">
+          <h3>Finance Illinois</h3>
+          <p>The site for a security consultancy in Champaign that works with Illinois banks, credit unions and fintechs. Built on WordPress.</p>
+          <a class="link" href="https://financeillinois.com/">Visit financeillinois.com <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </article>
+
+      <article class="win win--here" data-rv>
+        <div class="win__bar"><i></i><i></i><i></i><span>freeplayinc.org</span></div>
+        <a class="win__shot" href="#top" tabindex="-1" aria-hidden="true"><img src="/img/web/freeplayinc.webp" width="1100" height="2063" loading="lazy" alt=""></a>
+        <div class="win__body">
+          <h3>freeplayinc.org</h3>
+          <p>This one. Plain HTML, CSS and JavaScript with no framework, hosted on Cloudflare. The fonts are served from the site, and there are no trackers, cookies or third-party requests.</p>
+          <a class="link" href="#top">You are here <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="support">
+<!-- Rules -->
+<section class="chapter chapter--rules" id="rules" data-head="light">
   <div class="wrap">
-    <div class="support-box">
-      <span class="eyebrow">Support</span>
-      <h2>Enjoying the games?</h2>
-      <p>You can buy me a coffee. It is never required, and it unlocks nothing. For questions, ideas or a bug to report, send an email or open an issue in the game's repository.</p>
-      <div class="ctas">
-        <a class="btn primary" href="https://buymeacoffee.com/playinc">Buy me a coffee</a>
-        <a class="btn ghost" href="mailto:bartbasi@gmail.com">bartbasi@gmail.com</a>
-      </div>
+    <p class="eyebrow" data-rv>The rules</p>
+    <h2 class="h2 h2--xl" data-rv>Every game follows the same rules.</h2>
+    <p class="big" data-rv>No exceptions, and no fine print.</p>
+
+    <ul class="board" id="board" aria-label="The score">
+      <li data-rv><span class="board__n readout" data-roll="0">0</span><span class="board__k">ads</span></li>
+      <li data-rv><span class="board__n readout" data-roll="0">0</span><span class="board__k">trackers</span></li>
+      <li data-rv><span class="board__n readout" data-roll="0">0</span><span class="board__k">things to buy</span></li>
+      <li data-rv><span class="board__n readout" data-roll="0">0</span><span class="board__k">Android permissions</span></li>
+      <li data-rv><span class="board__n readout" data-roll="100">100</span><span class="board__k">percent open source</span></li>
+    </ul>
+
+    <ol class="rules">
+      <li data-rv><h3>Free, for good</h3><p>No ads and nothing to buy. Everything in the game is earned by playing.</p></li>
+      <li data-rv><h3>No tracking</h3><p>No accounts, no analytics and no tracking of any kind.</p></li>
+      <li data-rv><h3>Fully offline</h3><p>The games never connect to the internet and ask for no Android permissions.</p></li>
+      <li data-rv><h3>Your phone, your progress</h3><p>Saves stay on your phone. Nothing is sent anywhere.</p></li>
+      <li data-rv><h3>Open source</h3><p>Every game's source code is public, under the GNU GPL v3 with additional terms.</p></li>
+      <li data-rv><h3>Made in code</h3><p>Every picture, effect, sound and song is made by the game's own code.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Support -->
+<section class="support" id="support" data-head="ink">
+  <div class="wrap">
+    <p class="eyebrow" data-rv>Support</p>
+    <h2 class="h2 h2--xl" data-rv>Enjoying the games?</h2>
+    <p class="big" data-rv>You can buy me a coffee. It is never required, and it unlocks nothing. For questions, ideas or a bug to report, send an email or open an issue in the game's repository.</p>
+    <div class="btns" data-rv>
+      <a class="btn btn--solid" href="https://buymeacoffee.com/playinc">Buy me a coffee <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn" href="mailto:bartbasi@gmail.com">bartbasi@gmail.com</a>
+      <a class="btn" href="https://github.com/bartbasi">GitHub</a>
     </div>
   </div>
 </section>
+
 </main>
 
-<footer>
-  <div class="wrap">
+<footer class="foot" data-head="ink">
+  <div class="wrap foot__cols">
     <div>
-      <a class="brand" href="#">
-        <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#ffb547"/><path d="M25 19v26l21-13z" fill="#110e1d"/></svg>
-        Play, Inc.
-      </a>
-      <p style="margin-top: 12px;">Free games for Android phones. No ads, no tracking, nothing to buy.</p>
-    </div>
-    <div>
-      <h4>Games</h4>
+      <h2 class="foot__h">Games</h2>
       <ul>
-        <li><a href="#forkline">Forkline</a></li>
-        <li><a href="#sumup">SumUp</a></li>
         <li><a href="#updraft">Updraft</a></li>
-        <li><a href="#woodlogic">WoodLogic</a></li>
+        <li><a href="#sumup">SumUp</a></li>
         <li><a href="#sudoku">Sudoku</a></li>
+        <li><a href="#woodlogic">WoodLogic</a></li>
+        <li><a href="#forkline">Forkline</a></li>
       </ul>
     </div>
     <div>
-      <h4>Company</h4>
+      <h2 class="foot__h">Apps</h2>
       <ul>
-        <li><a href="#promise">Our promise</a></li>
+        <li><a href="#scaleconnect">ScaleConnect</a></li>
+        <li><a href="#shelfready">ShelfReady</a></li>
+        <li><a href="#daybook">Daybook</a></li>
+        <li><a href="#boardgames">Board Game Collector</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="foot__h">Company</h2>
+      <ul>
+        <li><a href="#story">The story</a></li>
+        <li><a href="#web">Web sites</a></li>
+        <li><a href="#rules">The rules</a></li>
         <li><a href="https://github.com/bartbasi">GitHub</a></li>
-        <li><a href="https://buymeacoffee.com/playinc">Buy me a coffee</a></li>
         <li><a href="mailto:bartbasi@gmail.com">Contact</a></li>
       </ul>
     </div>
-    <div class="fine">
-      <span>Copyright 2026 Play, Inc.</span>
-      <span>Made by Bart Basi.</span>
+    <div class="foot__fine">
+      <p>Copyright 2026 Free Play, Inc.</p>
+      <p>Made by Bart Basi, with assistance from Claude.</p>
+      <p>This site sets no cookies and loads nothing from anyone else.</p>
+      <a class="btn" href="#top">Play again</a>
     </div>
   </div>
+  <p class="foot__mega" aria-hidden="true">FREE PLAY</p>
 </footer>
+
+<script src="/js/site.js" defer></script>
 </body>
 </html>

@@ -1,11 +1,13 @@
-# Play, Inc.
+# Free Play, Inc.
 
-The source of the Play, Inc. website, https://bartbasi.github.io/
+The source of https://bartbasi.github.io/, a copy of the Free Play, Inc. web site at https://freeplayinc.org/.
 
-One HTML page with inline CSS and no script. It loads nothing from anywhere else: no cookie, font, stylesheet or tracker.
+It is one page of plain HTML, CSS and JavaScript with no build step. It loads nothing from anywhere else: no cookie, tracker or outside font. The fonts in `fonts/` are Anybody, Instrument Sans and Doto, all under the SIL Open Font License.
 
-The images in img/ are each game's own screenshots and icons, drawn by that game's code and resized for the web. The full-size originals live in each game's repository.
+The page names https://freeplayinc.org/ as its main address, so search engines treat this copy as the same site.
+
+The game screenshots in `img/` are each game's own, drawn by that game's code and resized for the web. The full-size originals live in each game's repository.
 
 `google218d7ed2f01f27bd.html` verifies the site in Google Search Console for Google Play. Never remove it.
 
-Copyright 2026 Play, Inc.
+Copyright 2026 Free Play, Inc.
