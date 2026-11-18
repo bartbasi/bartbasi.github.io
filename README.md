@@ -10,4 +10,10 @@ The game screenshots in `img/` are each game's own, drawn by that game's code an
 
 `google218d7ed2f01f27bd.html` verifies the site in Google Search Console for Google Play. Never remove it.
 
+The source of the site, with its tools and original pictures, is at https://github.com/bartbasi/freeplayinc.org.
+
+## License
+
 Copyright 2026 Free Play, Inc.
+
+The site is free software under the GNU General Public License, version 3, with additional terms. The license is in `LICENSE` and the additional terms are in `NOTICE`. The pictures of other work and the fonts keep their own licenses, as NOTICE explains.
